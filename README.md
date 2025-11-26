@@ -1,5 +1,7 @@
-# MCMoE: Completing Missing Modalities with Mixture of Experts for Incomplete Multimodal Action Quality Assessment
+# MCMoE
 [AAAI'26] Code for ''MCMoE: Completing Missing Modalities with Mixture of Experts for Incomplete Multimodal Action Quality Assessment''
+
+Paper Link: [Arxiv](https://arxiv.org/abs/2511.17397)
 
 ## Environments
 
