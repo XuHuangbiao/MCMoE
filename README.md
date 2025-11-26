@@ -31,8 +31,23 @@ CUDA_VISIBLE_DEVICES={device ID} python main.py --video-path {path of video feat
 CUDA_VISIBLE_DEVICES={device ID} python main.py --video-path {path of video features} --audio-path {path of audio features} --flow-path {path of flow features} --train-label-path {path of label file of training set} --test-label-path {path of label file of test set} --action-type {TES/PCS/SS/TR/PE/CO/IN} --in_dim 768 --n_head 2 --n_encoder 3 --n_decoder 3 --n_query 4 --test --ckpt {the name of the used checkpoint}
 ```
 
+**Please note! During training, we save the model that performs best in complete multimodal scenarios. Then, during testing, we evaluate this model across all incomplete multimodal scenarios. You can modify the code based on your specific application and select the optimal model for your needs.**
+
 Be patient and persistent in tuning the code to achieve new state-of-the-art results.
 
+## Citation
+If our project is helpful for your research, please consider citing:
+```
+@misc{xu2025mcmoecompletingmissingmodalities,
+      title={MCMoE: Completing Missing Modalities with Mixture of Experts for Incomplete Multimodal Action Quality Assessment}, 
+      author={Huangbiao Xu and Huanqi Wu and Xiao Ke and Junyi Wu and Rui Xu and Jinglin Xu},
+      year={2025},
+      eprint={2511.17397},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2511.17397}, 
+}
+```
 
 ## Acknowledgement
 This repository builds upon [GDLT (CVPR 2022)](https://github.com/xuangch/CVPR22_GDLT) and [MoMKE (ACMMM 2024)](https://github.com/wxxv/MoMKE).
