@@ -40,14 +40,11 @@ Be patient and persistent in tuning the code to achieve new state-of-the-art res
 ## Citation
 If our project is helpful for your research, please consider citing:
 ```
-@misc{xu2025mcmoecompletingmissingmodalities,
-      title={MCMoE: Completing Missing Modalities with Mixture of Experts for Incomplete Multimodal Action Quality Assessment}, 
-      author={Huangbiao Xu and Huanqi Wu and Xiao Ke and Junyi Wu and Rui Xu and Jinglin Xu},
-      year={2025},
-      eprint={2511.17397},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2511.17397}, 
+@article{xu2025mcmoe,
+  title={MCMoE: Completing Missing Modalities with Mixture of Experts for Incomplete Multimodal Action Quality Assessment},
+  author={Xu, Huangbiao and Wu, Huanqi and Ke, Xiao and Wu, Junyi and Xu, Rui and Xu, Jinglin},
+  journal={arXiv preprint arXiv:2511.17397},
+  year={2025}
 }
 ```
 
