@@ -7,9 +7,9 @@ from tensorboardX import SummaryWriter
 from models import model, loss
 import os
 from torch import nn
-
 import train
 from test import test_epoch
+import math
 
 
 def setup_seed(seed):
@@ -51,6 +51,27 @@ def get_scheduler(optim, args):
     return scheduler
 
 
+# Compute and print average metrics
+def compute_average(metric_list):
+    """
+    metric_list: list of tuples, each tuple is (rho, mse)
+    For metric 1, use Fisher Z transformation to compute mean then inverse transform:
+        z = 0.5 * (log(1 + r) - log(1 - r))
+        z_mean = mean(z)
+        r_avg = (exp(z_mean) - exp(-z_mean))/(exp(z_mean) + exp(-z_mean))
+    For metric 2, compute arithmetic mean.
+    """
+    r_values = [x[0] for x in metric_list]
+    z_list = []
+    for r in r_values:
+        # Ensure r is in (-1, 1)
+        z_list.append(0.5 * (math.log(1 + r) - math.log(1 - r)))
+    zz = np.mean(z_list)
+    num1_avg = (np.exp(zz) - np.exp(-zz)) / (np.exp(zz) + np.exp(-zz))
+    num2_avg = np.mean([x[1] for x in metric_list])
+    return num1_avg, num2_avg
+        
+
 if __name__ == '__main__':
     args = options.parser.parse_args()
     setup_seed(args.seed)
@@ -62,7 +83,14 @@ if __name__ == '__main__':
     '''
     train data
     '''
-    train_data = FS1000Dataset(args.video_path, args.audio_path, args.flow_path, args.train_label_path,
+    Dataset = FS1000Dataset
+    if args.dataset == 'RG':
+        Dataset = RGDataset
+    elif args.dataset == 'FisV':
+        Dataset = FisVDataset
+    elif args.dataset == 'FS1000':
+        Dataset = FS1000Dataset
+    train_data = Dataset(args.video_path, args.audio_path, args.flow_path, args.train_label_path,
                            clip_num=args.clip_num,
                            action_type=args.action_type, args=args)
     train_loader = DataLoader(train_data, batch_size=args.batch, shuffle=True, num_workers=8)
@@ -73,7 +101,7 @@ if __name__ == '__main__':
     '''
     test data
     '''
-    test_data = FS1000Dataset(args.video_path, args.audio_path, args.flow_path, args.test_label_path,
+    test_data = Dataset(args.video_path, args.audio_path, args.flow_path, args.test_label_path,
                           clip_num=args.clip_num,
                           action_type=args.action_type, train=False, args=args)
     test_loader = DataLoader(test_data, batch_size=args.batch, shuffle=False, num_workers=8)
@@ -108,6 +136,7 @@ if __name__ == '__main__':
             [1, 1, 1], [1, 1, 0], [1, 0, 1], [0, 1, 1], [1, 0, 0], [0, 1, 0], [0, 0, 1]
         ]  # Triplet corresponds to [V, A, F]
         results = []  # Store test results for each combination
+        results_for_avg = []  # Store results excluding [1,1,1] for averaging
 
         # Define modality names
         modalities = ['V', 'A', 'F']
@@ -125,6 +154,9 @@ if __name__ == '__main__':
                 "test_loss": test_loss,
                 "test_coef": coef
             })
+            # Store results for averaging (exclude [1,1,1])
+            if mask != [1, 1, 1]:
+                results_for_avg.append((coef, test_loss))
             # Print test results for current combination
             print(f"Combination {i + 1}: {combination_name}")
             print('Test Loss: {:.4f}\tTest Coef: {:.3f}'.format(test_loss, coef))
@@ -135,6 +167,10 @@ if __name__ == '__main__':
             print(f"Combination: {result['name']}\t"
                   f"Test Loss: {result['test_loss']:.2f}\t"
                   f"Test Coef: {result['test_coef']:.3f}")
+
+        avg_coef, avg_loss = compute_average(results_for_avg)
+        print(f"\nAverage metrics (excluding VAF):")
+        print(f"Average Test Loss: {avg_loss:.4f}\tAverage Test Coef: {avg_coef:.3f}")
 
         raise SystemExit
 

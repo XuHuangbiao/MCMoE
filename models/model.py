@@ -102,7 +102,7 @@ class MoE_AQA(nn.Module):
         # Initialize projection network
         self.in_proj = nn.ModuleDict({
             'v': self._build_proj(in_dim, hidden_dim),
-            'a': self._build_proj(in_dim, hidden_dim),
+            'a': self._build_proj(768, hidden_dim),
             'f': self._build_proj(1024, hidden_dim)
         })
 
@@ -183,7 +183,7 @@ class MoE_AQA(nn.Module):
         proj_a = self.transformer.encoder(a)
         proj_f = self.transformer.encoder(f)
 
-        v_mask, a_mask, f_mask = generate_modality_mask(v.size(0), v.device)
+        v_mask, a_mask, f_mask = generate_modality_mask()
         v_mask = proj_v if v_mask == 1 else torch.zeros_like(proj_v)
         a_mask = proj_a if a_mask == 1 else torch.zeros_like(proj_a)
         f_mask = proj_f if f_mask == 1 else torch.zeros_like(proj_f)

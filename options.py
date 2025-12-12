@@ -7,6 +7,7 @@ parser.add_argument('--audio-path', type=str, default='./dataset/FS1000/ast_feat
 parser.add_argument('--flow-path', type=str, default='./dataset/FS1000/i3d_avg_clip8_5s_fs1000')
 parser.add_argument('--clip-num', type=int, default=95)
 
+parser.add_argument('--dataset', type = str, choices=['FS1000', 'FisV', 'RG'], default='FS1000')
 parser.add_argument('--train-label-path', type=str, default='./dataset/FS1000/train_fs1000_new.txt')
 parser.add_argument('--test-label-path', type=str, default='./dataset/FS1000/val_fs1000_new.txt')
 
