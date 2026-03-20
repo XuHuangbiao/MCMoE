@@ -9,11 +9,10 @@ Paper Link: [Arxiv](https://arxiv.org/abs/2511.17397v2)
 - CUDA: 12.2
 - Python: 3.9.0
 - PyTorch: 1.12.0+cu113
-```
+
 Please note!!! The current experimental setup has been modified compared to previous versions. We apologize for having mistakenly copied and pasted the environment settings from one of our other projects, which resulted in some discrepancies in the reproducible results.
 
 The environment described in the paper is the correct one. We have verified that the results can now be accurately reproduced under the current conditions. We sincerely apologize for any inconvenience caused by the previous incorrect settings!
-```
 
 ## Dataset Preparation
 ### Features
