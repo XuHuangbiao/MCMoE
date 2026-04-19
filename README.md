@@ -3,6 +3,11 @@
 
 Paper Link: [Arxiv](https://arxiv.org/abs/2511.17397v2)
 
+## Abstract
+Multimodal Action Quality Assessment (AQA) has recently emerged as a promising paradigm. By leveraging complementary information across shared contextual cues, it enhances the discriminative evaluation of subtle intra-class variations in highly similar action sequences. However, partial modalities are frequently unavailable at the inference stage in reality. The absence of any modality often renders existing multimodal models inoperable. Furthermore, it triggers catastrophic performance degradation due to interruptions in cross-modal interactions. To address this issue, we propose a novel Missing Completion Framework with Mixture of Experts (MCMoE) that unifies unimodal and joint representation learning in single-stage training. Specifically, we propose an adaptive gated modality generator that dynamically fuses available information to reconstruct missing modalities. We then design modality experts to learn unimodal knowledge and dynamically mix the knowledge of all experts to extract cross-modal joint representations. With a mixture of experts, missing modalities are further refined and complemented. Finally, in the training phase, we mine the complete multimodal features and unimodal expert knowledge to guide modality generation and generation-based joint representation extraction. Extensive experiments demonstrate that our MCMoE achieves state-of-the-art results in both complete and incomplete multimodal learning on three public AQA benchmarks.
+
+![Framework](Framework.png)
+
 ## Environments
 
 - RTX 3090
@@ -112,11 +117,14 @@ Be patient and persistent in tuning the code to achieve new state-of-the-art res
 ## Citation
 If our project is helpful for your research, please consider citing:
 ```
-@article{xu2025mcmoe,
+@inproceedings{xu2026mcmoe,
   title={MCMoE: Completing Missing Modalities with Mixture of Experts for Incomplete Multimodal Action Quality Assessment},
   author={Xu, Huangbiao and Wu, Huanqi and Ke, Xiao and Wu, Junyi and Xu, Rui and Xu, Jinglin},
-  journal={arXiv preprint arXiv:2511.17397},
-  year={2025}
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={40},
+  number={13},
+  pages={11241--11249},
+  year={2026}
 }
 ```
 
