@@ -68,7 +68,7 @@ On the **FS1000** dataset:
 - Training
 
 ```
-CUDA_VISIBLE_DEVICES={device ID} python main.py --video-path {path of video features} --audio-path {path of audio features} --flow-path {path of flow features} --train-label-path {path of label file of training set} --test-label-path {path of label file of test set} --model-name {the name used to save model and log} --action-type {TES/PCS/SS/TR/PE/CO/IN} --dataset FS1000 --clip-num 95 --lr 1e-4 --epoch {360/460/360/210/520/520/390} --in_dim 768 --n_head 2 --n_encoder 3 --n_decoder 3 --n_query 4 --alpha 1.0 --margin 1.0 --lr-decay cos --decay-rate 0.01 --dropout 0.3
+CUDA_VISIBLE_DEVICES={device ID} python main.py --video-path {path of video features} --audio-path {path of audio features} --flow-path {path of flow features} --train-label-path {path of label file of training set} --test-label-path {path of label file of test set} --model-name {the name used to save model and log} --action-type {TES/PCS/SS/TR/PE/CO/IN} --dataset FS1000 --clip-num 95 --lr 1e-4 --epoch {360/460/360/210/520/520/390} --in_dim 768 --n_head 2 --n_encoder 3 --n_decoder 3 --n_query 4 --alpha 1.0 --margin 1.0 --lr-decay cos --decay-rate 0.01 --dropout 0.3 --seed 1
 ```
 
 - Testing
@@ -82,13 +82,13 @@ On the **FisV** dataset:
 - Training
 
 ```
-CUDA_VISIBLE_DEVICES={device ID} python main.py --video-path {path of video features} --audio-path {path of audio features} --flow-path {path of flow features} --train-label-path {path of label file of training set} --test-label-path {path of label file of test set} --model-name {the name used to save model and log} --action-type {TES/PCS} --dataset FisV --clip-num 124 --lr 2e-4 --epoch {460/510} --in_dim 1024 --n_head 2 --n_encoder 3 --n_decoder 3 --n_query 4 --use_pe True --alpha 0.5 --margin 1.0 --lr-decay cos --decay-rate 0.01 --dropout 0.3
+CUDA_VISIBLE_DEVICES={device ID} python main.py --video-path {path of video features} --audio-path {path of audio features} --flow-path {path of flow features} --train-label-path {path of label file of training set} --test-label-path {path of label file of test set} --model-name {the name used to save model and log} --action-type {TES/PCS} --dataset FisV --clip-num 124 --lr 2e-4 --epoch {460/510} --in_dim 1024 --n_head 2 --n_encoder 3 --n_decoder 3 --n_query 4 --alpha 0.5 --margin 1.0 --lr-decay cos --decay-rate 0.01 --dropout 0.3 --seed 3
 ```
 
 - Testing
 
 ```
-CUDA_VISIBLE_DEVICES={device ID} python main.py --video-path {path of video features} --audio-path {path of audio features} --flow-path {path of flow features} --train-label-path {path of label file of training set} --test-label-path {path of label file of test set} --action-type {TES/PCS} --dataset FisV --clip-num 124 --in_dim 1024 --n_head 2 --n_encoder 3 --n_decoder 3 --n_query 4 --use_pe True --test --ckpt {the name of the used checkpoint}
+CUDA_VISIBLE_DEVICES={device ID} python main.py --video-path {path of video features} --audio-path {path of audio features} --flow-path {path of flow features} --train-label-path {path of label file of training set} --test-label-path {path of label file of test set} --action-type {TES/PCS} --dataset FisV --clip-num 124 --in_dim 1024 --n_head 2 --n_encoder 3 --n_decoder 3 --n_query 4 --test --ckpt {the name of the used checkpoint}
 ```
 
 On the **RG** dataset:
@@ -96,7 +96,7 @@ On the **RG** dataset:
 - Training
 
 ```
-CUDA_VISIBLE_DEVICES={device ID} python main.py --video-path {path of video features} --audio-path {path of audio features} --flow-path {path of flow features} --train-label-path {path of label file of training set} --test-label-path {path of label file of test set} --model-name {the name used to save model and log} --action-type {Ball/Clubs/Hoop/Ribbon} --dataset RG --clip-num 68 --lr 2e-4 --epoch {410/560/270/300} --in_dim 1024 --n_head 2 --n_encoder 3 --n_decoder 3 --n_query 4 --use_pe True --alpha 1.0 --margin 1.0 --lr-decay cos --decay-rate 0.01 --dropout 0.3
+CUDA_VISIBLE_DEVICES={device ID} python main.py --video-path {path of video features} --audio-path {path of audio features} --flow-path {path of flow features} --train-label-path {path of label file of training set} --test-label-path {path of label file of test set} --model-name {the name used to save model and log} --action-type {Ball/Clubs/Hoop/Ribbon} --dataset RG --clip-num 68 --lr 2e-4 --epoch {410/560/270/300} --in_dim 1024 --n_head 2 --n_encoder 3 --n_decoder 3 --n_query 4 --use_pe True --alpha 1.0 --margin 1.0 --lr-decay cos --decay-rate 0.01 --dropout 0.3 --seed 0
 ```
 
 - Testing
